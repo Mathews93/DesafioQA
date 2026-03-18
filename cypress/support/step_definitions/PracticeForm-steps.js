@@ -10,7 +10,6 @@ Given("acesso a seção Forms", () => {
 });
 
 When("preencho o formulário corretamente", () => {
-
     practiceFormPage.clicar_PracticeForms_Button();
 
     practiceFormPage.preencherNome("Mathews", "Cavalcanti");
