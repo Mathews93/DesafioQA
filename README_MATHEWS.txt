@@ -42,4 +42,6 @@ Após abrir o Cypress:
 
 Observações:
 
-Durante a execução dos testes, o ambiente do DemoQA pode apresentar instabilidades ocasionais
+- Durante a execução dos testes, o ambiente do DemoQA pode apresentar instabilidades ocasionais
+- A seção 5 da parte 2 (Cypress) do desafio enunciou que o candidato deveria colocar os elementos na ordem crescente. Provavelmente, após a atualização de um site, a ordem dos elementos já estava crescente.
+- Nesse caso, eu coloquei na ordem decrescente, e depois novamente na ordem decrescente, para testar o funcionamento do Drag & Drop.
