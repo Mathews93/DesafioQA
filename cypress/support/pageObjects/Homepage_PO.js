@@ -1,4 +1,5 @@
 class HomePage {
+    
     visitarHomepage() {
         cy.visit("https://demoqa.com/");
     }

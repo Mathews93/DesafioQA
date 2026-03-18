@@ -1,14 +1,9 @@
 import { Given, When, Then} from 'cypress-cucumber-preprocessor/steps'
-import HomePage_PO from '../../support/pageObjects/Homepage_PO'
-import PracticeFormPage from '../../support/pageObjects/PracticeFormPage'
-/// <reference types ="Cypress" />
+import HomePage_PO from '../pageObjects/Homepage_PO'
+import PracticeFormPage from '../pageObjects/PracticeFormPage'
 
 const homepage_PO = new HomePage_PO();
 const practiceFormPage = new PracticeFormPage();
-
-Given("que acesso o site DemoQA", () => {
-    homepage_PO.visitarHomepage();
-});
 
 Given("acesso a seção Forms", () => {
     homepage_PO.clicar_Forms_Button();
