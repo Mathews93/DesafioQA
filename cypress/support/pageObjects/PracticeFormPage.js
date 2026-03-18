@@ -4,16 +4,11 @@ class PracticeFormPage {
         cy.get("a[href*='automation-practice-form']").click();
     }
 
-    preencherNome(nome, ultimonome) {
+    preencherInfosBasicas(nome, ultimonome, email, genero, numero) {
         cy.get('#firstName').type(nome);
         cy.get('#lastName').type(ultimonome);
-    }
-
-    preencherEmail(email) {
         cy.get('#userEmail').type(email);
-    }
 
-    selecionarGenero(genero) {
         const generos = {
         Male: '#gender-radio-1',
         Female: '#gender-radio-2',
@@ -21,9 +16,7 @@ class PracticeFormPage {
         };
 
         cy.get(generos[genero]).click({ force: true });
-    }
 
-    preencherTelefone(numero) {
         cy.get('#userNumber').type(numero);
         cy.get('#userNumber').invoke('val').should('have.length', 10)
     }
@@ -50,12 +43,10 @@ class PracticeFormPage {
         });
     }
 
-    preencherEndereco(endereco) {
+    preencherEnderecoEstadoECidade(endereco, estado, cidade) {
         cy.get('#currentAddress').type(endereco);
-    }
 
-    selecionarEstadoECidade(estado, cidade) {
-        cy.get('#state').click();
+                cy.get('#state').click();
         cy.get('#react-select-3-input').type(estado);
         cy.contains('div', estado).click();
 

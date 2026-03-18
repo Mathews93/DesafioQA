@@ -19,5 +19,8 @@
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
     "stepDefinitions": "cypress/support/step_definitions"
+  },
+  "dependencies": {
+    "@4tw/cypress-drag-drop": "^2.3.1"
   }
 }

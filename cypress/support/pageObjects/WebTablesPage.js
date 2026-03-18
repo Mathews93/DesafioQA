@@ -46,7 +46,7 @@ class WebTablesPage {
 
     submitMultiplosUsuarios(usuarios) {
         // Uso do wrap por conta da natureza assíncrona do Cypress
-        // Usando um for estava quebrando o código, por assincronia do conteúdo de registrosCriados
+        // Usando um "for" estava quebrando o código, por assincronia do conteúdo de registrosCriados
         cy.wrap(usuarios).each((usuario) => {
             cy.get('select').closest('.flex-grow-1').find('select').select('20');
             cy.get("#addNewRecordButton").click();

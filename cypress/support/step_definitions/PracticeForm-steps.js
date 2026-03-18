@@ -12,16 +12,12 @@ Given("acesso a seção Forms", () => {
 When("preencho o formulário corretamente", () => {
     practiceFormPage.clicar_PracticeForms_Button();
 
-    practiceFormPage.preencherNome("Mathews", "Cavalcanti");
-    practiceFormPage.preencherEmail("mnunes1@yopmail.com");
-    practiceFormPage.selecionarGenero('Male');
-    practiceFormPage.preencherTelefone("8199999999");
+    practiceFormPage.preencherInfosBasicas("Mathews", "Cavalcanti", "mnunes1@yopmail.com", 'Male', "8199999999")
     practiceFormPage.preencherDataNascimento();
     practiceFormPage.preencherSubjects();
     practiceFormPage.uploadArquivo();
     practiceFormPage.selecionarHobbies(['Sports', 'Music']);
-    practiceFormPage.preencherEndereco("Rua Fulana de Tal, 80, Rio Doce, Olinda, PE");
-    practiceFormPage.selecionarEstadoECidade('NCR', 'Delhi');
+    practiceFormPage.preencherEnderecoEstadoECidade("Rua Fulana de Tal, 80, Rio Doce, Olinda, PE", 'NCR', 'Delhi');
 });
 
 When("submeto o formulário", () => {
