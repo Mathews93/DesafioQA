@@ -9,7 +9,7 @@ module.exports = defineConfig({
     },
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx,feature}",
     excludeSpecPattern: "cypress/e2e/other/*.js",
-    baseUrl: "https://webdriveruniversity.com",
+    baseUrl: "https://demoqa.com",
     chromeWebSecurity: false,
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 120000,
