@@ -1,0 +1,431 @@
+{
+  "info": {
+    "_postman_id": "64e967c8-44c2-402a-8b19-b0d878f238b0",
+    "name": "Casos_de_Teste",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48763575",
+    "_collection_link": "https://go.postman.co/collection/48763575-64e967c8-44c2-402a-8b19-b0d878f238b0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1_CONTA_DE_USUARIO",
+      "item": [
+        {
+          "name": "1_CRIAR_UM_USUARIO_SUCESSO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Salvando o response JSON em uma variável para uso futuro.",
+                  "var jsonResponse = pm.response.json();",
+                  "",
+                  "//Validando o código de status do response.",
+                  "pm.test(\"Código é 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "//Validando se o campo userID não é nulo. Se não for, salva o valor na variável de ambiente userId.",
+                  "pm.test(\"ID não é nulo\", () => {",
+                  "    pm.expect(jsonResponse.userID).to.not.eq(undefined)",
+                  "    pm.environment.set(\"userId\", jsonResponse.userID);",
+                  "    pm.environment.set(\"username\", jsonResponse.username);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"BASE_URL\", \"https://demoqa.com\");\r",
+                  "\r",
+                  "//Usei o Mathews + Date.now() para gerar um username único para cada execução do script\r",
+                  "pm.environment.set(\"username\", \"Mathews\" + Date.now());\r",
+                  "\r",
+                  "pm.environment.set(\"password\", \"Senha@123\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userName\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/Account/v1/User",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "Account",
+                "v1",
+                "User"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://demoqa.com/Account/v1/User' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+          },
+          "response": []
+        },
+        {
+          "name": "2_GERAR_TOKEN_SUCCESSO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Salvando o response JSON em uma variável para uso futuro.\r",
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "//Validando o status code do response.\r",
+                  "pm.test(\"Código é 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "//Validando se o token foi gerado corretamente.\r",
+                  "pm.test(\"Token não é nulo\", () => {\r",
+                  "    pm.expect(jsonResponse.token).to.not.eq(undefined);\r",
+                  "    pm.environment.set(\"token\", jsonResponse.token);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userName\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/Account/v1/GenerateToken",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "Account",
+                "v1",
+                "GenerateToken"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://demoqa.com/Account/v1/GenerateToken' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+          },
+          "response": []
+        },
+        {
+          "name": "3_CONFIRMAR_USUARIO_AUTORIZADO_SUCCESSO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Salvando o response JSON em uma variável para uso futuro.\r",
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "//Validando o status code do response.\r",
+                  "pm.test(\"Código é 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "//Validando se o response é um booleano.\r",
+                  "pm.test(\"Response é bool\", function () {\r",
+                  "    pm.expect(typeof jsonResponse).to.eql(\"boolean\");\r",
+                  "});\r",
+                  "\r",
+                  "//Validando se o usuário está autorizado\r",
+                  "pm.test(\"Usuário criado está autorizado\", () => {\r",
+                  "    pm.expect(jsonResponse).to.be.true;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userName\": \"{{username}}\",\r\n  \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/Account/v1/Authorized",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "Account",
+                "v1",
+                "Authorized"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://demoqa.com/Account/v1/Authorized' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}'"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2_LIVROS",
+      "item": [
+        {
+          "name": "1_LISTAR_LIVROS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Salvando o response JSON em uma variável para uso futuro.\r",
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"isbn1\", jsonResponse.books[0].isbn);\r",
+                  "pm.environment.set(\"isbn2\", jsonResponse.books[1].isbn);\r",
+                  "\r",
+                  "//Validando o status code do response.\r",
+                  "pm.test(\"Código é 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "//Validando se a lista de livros existe no response.\r",
+                  "pm.test(\"Lista de livros existe\", function () {\r",
+                  "    pm.expect(jsonResponse.books).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "//Validando se existem pelo menos dois livros na lista.\r",
+                  "pm.test(\"Pelo menos dois livros disponíveis\", function () {\r",
+                  "    let books = jsonResponse.books;\r",
+                  "    pm.expect(books.length).to.be.at.least(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/BookStore/v1/Books",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "BookStore",
+                "v1",
+                "Books"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://demoqa.com/BookStore/v1/Books' \\\r\n  -H 'accept: application/json'"
+          },
+          "response": []
+        },
+        {
+          "name": "2_ALUGAR_DOIS_LIVROS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Salvando o response JSON em uma variável para uso futuro.",
+                  "var jsonResponse = pm.response.json();",
+                  "",
+                  "//Validando o status code do response.",
+                  "pm.test(\"Código é 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "//Validando se os ISBNs retornados são válidos.",
+                  "pm.test(\"ISBN retornados são válidos\", function () {",
+                  "    pm.expect(jsonResponse.books).to.have.length(2);",
+                  "    pm.expect(jsonResponse.books[0].isbn).to.not.be.empty;",
+                  "    pm.expect(jsonResponse.books[1].isbn).to.not.be.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"userId\": \"{{userId}}\",\r\n  \"collectionOfIsbns\": [\r\n    {\r\n      \"isbn\": \"{{isbn1}}\"\r\n    },\r\n    \r\n    {\r\n      \"isbn\": \"{{isbn2}}\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/BookStore/v1/Books",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "BookStore",
+                "v1",
+                "Books"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://demoqa.com/BookStore/v1/Books' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'authorization: Basic TWF0aGV3czE3NzM2OTQ0MjgzMDE6U2VuaGFAMTIz' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"userId\": \"string\",\r\n  \"collectionOfIsbns\": [\r\n    {\r\n      \"isbn\": \"string\"\r\n    }\r\n  ]\r\n}'"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "3_VALIDAÇÃO",
+      "item": [
+        {
+          "name": "1_LISTAR_DETALHES_USUARIO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "//Salvando o response JSON em uma variável para uso futuro.\r",
+                  "var jsonResponse = pm.response.json();\r",
+                  "\r",
+                  "//validando o status code do response.\r",
+                  "pm.test(\"Código é 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "//Validando os campos importantes do response.\r",
+                  "pm.test(\"Verificar campos importantes\", function () {\r",
+                  "    pm.expect(jsonResponse.books[0]).to.have.property('title');\r",
+                  "    pm.expect(jsonResponse.books[0]).to.have.property('isbn');\r",
+                  "    pm.expect(jsonResponse.books[0]).to.have.property('author');\r",
+                  "    pm.expect(jsonResponse.userId).to.eq(pm.environment.get(\"userId\"));\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/Account/v1/User/{{userId}}",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "Account",
+                "v1",
+                "User",
+                "{{userId}}"
+              ]
+            },
+            "description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://demoqa.com/Account/v1/User/{UUID}' \\\r\n  -H 'accept: application/json'"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
